@@ -12,14 +12,27 @@ function agregarForm(e) {
     e.preventDefault();
 
       
-    const tweets = document.querySelector('#tweet').value;
+    const tweet = document.querySelector('#tweet').value;
 
-    if (tweets === '') {
+    if (tweet === '') {
         mostrarError('El mensaje no puede ir vacio');
         return;
     }
 
-    console.log('agregaste un tweet');
+    const tweetObj = {
+        id: Date.now(),
+        tweet
+    }
+
+    //agregar los tweet a; arreglo
+    tweets = [...tweets,tweetObj];
+
+    //creamos el html para mostrar los tweets
+    crearHTML();
+
+    //reiniciar el html
+
+    formulario.reset();
 
 }
 
@@ -40,4 +53,34 @@ function mostrarError(error) {
         }, 1500);
 
 
+}
+
+function crearHTML() {
+    //limpiamos el html
+    limpiarHTML();
+
+        if (tweets.length > 0) {
+
+            tweets.forEach((tweet) => {
+
+                ///crear el  html
+
+                const li = document.createElement('li');
+
+                li.innerText = tweet.tweet;
+
+                //agregarlo al HTML
+                listaTweets.appendChild(li);
+
+            });
+            
+        }
+}
+
+function limpiarHTML() {
+            while ( listaTweets.firstChild) {
+
+                listaTweets.removeChild(listaTweets.firstChild);
+                
+            }
 }
