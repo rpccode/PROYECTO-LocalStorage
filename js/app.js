@@ -7,6 +7,13 @@ let tweets = [];
 //eventos
 formulario.addEventListener('submit', agregarForm);
 
+//cuando el documento esta listo
+document.addEventListener('DOMContentLoaded',() => {
+    tweets = JSON.parse(localStorage.getItem('tweets')) || [];
+
+    crearHTML();
+})
+
 //funciones
 function agregarForm(e) {
     e.preventDefault();
@@ -75,6 +82,12 @@ function crearHTML() {
             });
             
         }
+
+        sincronarStorage();
+}
+
+function sincronarStorage() {
+    localStorage.setItem('tweets', JSON.stringify(tweets));
 }
 
 function limpiarHTML() {
