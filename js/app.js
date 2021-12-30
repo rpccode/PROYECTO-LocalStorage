@@ -11,6 +11,33 @@ formulario.addEventListener('submit', agregarForm);
 function agregarForm(e) {
     e.preventDefault();
 
-        console.log('agregar');
+      
+    const tweets = document.querySelector('#tweet').value;
+
+    if (tweets === '') {
+        mostrarError('El mensaje no puede ir vacio');
+        return;
+    }
+
+    console.log('agregaste un tweet');
+
+}
+
+function mostrarError(error) {
+        const errorMessage =document.createElement('p');
+        errorMessage.textContent =error;
+        errorMessage.classList.add('error');
+
+
+
+        const contenido = document.querySelector('#contenido');
+
+        contenido.appendChild(errorMessage);
+
+
+        setTimeout(() => {
+                errorMessage.remove();
+        }, 1500);
+
 
 }
